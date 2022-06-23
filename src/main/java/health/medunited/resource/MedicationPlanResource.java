@@ -54,9 +54,9 @@ public class MedicationPlanResource {
             JsonObject jo = (JsonObject) jv;
             String mimeType = jo.getString("mimeType", "application/json");
             if("application/xml".equals(mimeType)) {
-                bt.setBundle(xmlParser.parseResource(Bundle.class, jo.getJsonString("bundle").getString()));
+                bt.setBundle(jo.getJsonString("bundle").getString());
             } else {
-                bt.setBundle(jsonParser.parseResource(Bundle.class, jo.getJsonObject("bundle").toString()));
+                bt.setBundle(jo.getJsonObject("bundle").toString());
             }
         }
         return bt;

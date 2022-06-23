@@ -20,51 +20,29 @@
                  line-height="normal" font-selection-strategy="character-by-character"
                  line-height-shift-adjustment="disregard-shifts" writing-mode="lr-tb"
                  language="DE">
+
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="DIN-A5" column-count="2"
                                        page-width="210mm" page-height="148mm"
                                        margin-top="5mm" margin-bottom="5mm"
                                        margin-left="8mm" margin-right="5mm">
-                    <fo:region-body region-name="body"
-                                    margin-top="60mm" margin-bottom="0mm"
-                                    margin-left="2mm" margin-right="5mm"/>
+                    <fo:region-body
+                            margin-top="10mm" margin-bottom="0mm"
+                            margin-left="2mm" margin-right="5mm"/>
                     <fo:region-before region-name="header" extent="55mm"/>
                     <fo:region-after region-name="footer" extent="50mm"/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
-            <fo:declarations>
-                <x:xmpmeta xmlns:x="adobe:ns:meta/">
-                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                        <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/"
-                                         rdf:about="">
-                            <dc:title>E-Rezept</dc:title>
-                            <dc:description></dc:description>
-                        </rdf:Description>
-                        <rdf:Description xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
-                                         rdf:about=""/>
-                        <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/"
-                                         rdf:about="">
-                            <xmp:CreatorTool>ere.health</xmp:CreatorTool>
-                        </rdf:Description>
-                    </rdf:RDF>
-                </x:xmpmeta>
-                <pdf:embedded-file filename="Bundles.xml" description="Embedded Bundles XML">
-                    <xsl:attribute name="src">
-                        url(<xsl:value-of select="$bundleFileUrl"/>)
-                    </xsl:attribute>
-                </pdf:embedded-file>
-            </fo:declarations>
-            <fo:page-sequence master-reference="DIN-A5" initial-page-number="1">
+
+            <fo:page-sequence master-reference="DIN-A5">
                 <fo:static-content flow-name="header">
                     <xsl:call-template name="header"/>
                 </fo:static-content>
-                <fo:static-content flow-name="footer">
-                    <xsl:call-template name="footer"/>
-                </fo:static-content>
-                <fo:flow flow-name="body">
-                    <xsl:call-template name="body"/>
+                <fo:flow flow-name="xsl-region-body">
+                    <fo:block>Hello W3Schools</fo:block>
                 </fo:flow>
             </fo:page-sequence>
+
         </fo:root>
     </xsl:template>
 
@@ -84,193 +62,20 @@
     </xsl:template>
 
     <xsl:template name="header">
-        <fo:table>
+        <fo:table border-style="solid">
             <fo:table-column column-number="1" column-width="70%"/>
             <fo:table-column column-number="2" column-width="2%"/>
             <fo:table-column column-number="3" column-width="28%"/>
             <fo:table-body>
-                <fo:table-cell>
-                    <fo:table border-separation="1mm" fox:border-radius="3mm"
-                              border-collapse="separate">
-                        <fo:table-body>
-                            <fo:table-row height="5mm">
-                                <fo:table-cell number-columns-spanned="2">
-                                    <fo:block font-family="Liberation Sans" font-weight="bold" font-size="12pt">
-                                        Ausdruck zur Einlösung Ihres E-Rezeptes
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-                            <fo:table-row>
-                                <fo:table-cell number-columns-spanned="2" fox:border-radius="1mm"
-                                               border="solid 0.5pt black">
-                                    <fo:table>
-                                        <fo:table-column/>
-                                        <fo:table-column/>
-                                        <fo:table-header>
-                                            <fo:table-row>
-                                                <fo:table-cell width="100mm">
-                                                    <fo:block font-size="6pt" margin-left="1mm"
-                                                              font-family="Liberation Sans" font-weight="bold">für
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                                <fo:table-cell>
-                                                    <fo:block font-size="6pt"
-                                                              font-family="Liberation Sans" margin-left="5mm" font-weight="bold">geboren am
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                            </fo:table-row>
-                                        </fo:table-header>
-                                        <fo:table-body>
-                                            <fo:table-row>
-                                                <fo:table-cell width="100mm">
-                                                    <fo:block margin-left="1mm">
-                                                        <xsl:choose>
-                                                            <xsl:when test="(string-length(fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:given/@value) + string-length(fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:family/@value)) &gt; 75">
-                                                                <xsl:attribute name="font-size">10pt</xsl:attribute>
-                                                            </xsl:when>
-                                                            <xsl:otherwise>
-                                                                <xsl:attribute name="font-size">12pt</xsl:attribute>
-                                                            </xsl:otherwise>
-                                                        </xsl:choose>
-                                                        <xsl:choose>
-                                                            <xsl:when test="(string-length(fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:given/@value) + string-length(fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:family/@value)) &gt; 85">
-                                                                <xsl:value-of
-                                                                        select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:given/@value"/>
-                                                                <xsl:text>  </xsl:text>
-                                                                <xsl:value-of
-                                                                        select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:family/fhir:extension[@url='http://hl7.org/fhir/StructureDefinition/humanname-own-name']/fhir:valueString/@value"/>
-                                                            </xsl:when>
-                                                            <xsl:otherwise>
-                                                                <xsl:value-of
-                                                                        select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:prefix/@value"/>
-                                                                <xsl:text>  </xsl:text>
-                                                                <xsl:value-of
-                                                                        select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:given/@value"/>
-                                                                <xsl:text>  </xsl:text>
-                                                                <xsl:value-of
-                                                                        select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:name/fhir:family/@value"/>
-                                                            </xsl:otherwise>
-                                                        </xsl:choose>
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                                <fo:table-cell>
-                                                    <fo:block margin-left="5mm">
-                                                        <xsl:call-template name="formatDate">
-                                                            <xsl:with-param name="date" select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Patient/fhir:birthDate/@value"/>
-                                                        </xsl:call-template>
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                            </fo:table-row>
-                                        </fo:table-body>
-                                    </fo:table>
-                                </fo:table-cell>
-                            </fo:table-row>
-                            <fo:table-row height="4mm">
-                                <fo:table-cell>
-                                    <fo:block/>
-                                </fo:table-cell>
-                            </fo:table-row>
-                            <fo:table-row>
-                                <fo:table-cell number-columns-spanned="2" fox:border-radius="1mm"
-                                               border="solid 0.5pt black">
-                                    <fo:table>
-                                        <fo:table-column/>
-                                        <fo:table-column/>
-                                        <fo:table-header>
-                                            <fo:table-row>
-                                                <fo:table-cell>
-                                                    <fo:block font-size="6pt" margin-left="1mm"
-                                                              font-family="Liberation Sans" font-weight="bold">
-                                                        ausgestellt von
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                                <fo:table-cell>
-                                                    <fo:block font-size="6pt" margin-left="5mm"
-                                                              font-family="Liberation Sans" font-weight="bold">
-                                                        ausgestellt am
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                            </fo:table-row>
-                                        </fo:table-header>
-                                        <fo:table-body>
-                                            <fo:table-row height="20mm">
-                                                <fo:table-cell width="100mm" margin-left="1mm">
-                                                    <xsl:variable
-                                                            name="author"
-                                                            select="fn:tokenize(fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Composition/fhir:author/fhir:reference/@value, '/')[last()]" />
-                                                    <xsl:for-each select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Practitioner">
-                                                        <xsl:if test="$author = fhir:id/@value">
-                                                            <fo:block font-size="12pt">
-                                                                <xsl:value-of
-                                                                        select="fhir:name/fhir:prefix/@value"/>
-                                                                <xsl:text>  </xsl:text>
-                                                                <xsl:value-of
-                                                                        select="fhir:name/fhir:given/@value"/>
-                                                                <xsl:text>  </xsl:text>
-                                                                <xsl:value-of
-                                                                        select="fhir:name/fhir:family/@value"/>
-                                                            </fo:block>
-                                                        </xsl:if>
-                                                    </xsl:for-each>
-                                                    <xsl:for-each
-                                                            select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Organization">
-                                                        <fo:block font-size="12pt">
-                                                            <xsl:value-of
-                                                                    select="fhir:name/@value"/>
-                                                        </fo:block>
-                                                    </xsl:for-each>
-                                                    <xsl:for-each
-                                                            select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:Organization/fhir:telecom">
-                                                        <xsl:if test="fhir:system/@value = 'phone' or fhir:system/@value = 'email'">
-                                                            <fo:block font-size="12pt">
-                                                                <xsl:value-of select="fhir:value/@value"/>
-                                                            </fo:block>
-                                                        </xsl:if>
-                                                    </xsl:for-each>
-                                                </fo:table-cell>
-                                                <fo:table-cell>
-                                                    <fo:block margin-left="5mm">
-                                                        <xsl:variable name="authoredOn" select="fhir:bundle[1]/fhir:Bundle/fhir:entry/fhir:resource/fhir:MedicationRequest/fhir:authoredOn/@value" />
-                                                        <xsl:for-each select="tokenize($authoredOn, 'T')">
-                                                            <xsl:if test="position()=1">
-                                                                <xsl:call-template name="formatDate">
-                                                                    <xsl:with-param name="date" select="."/>
-                                                                </xsl:call-template>
-                                                            </xsl:if>
-                                                        </xsl:for-each>
-                                                    </fo:block>
-                                                </fo:table-cell>
-                                            </fo:table-row>
-                                        </fo:table-body>
-                                    </fo:table>
-                                </fo:table-cell>
-                            </fo:table-row>
-                        </fo:table-body>
-                    </fo:table>
-                </fo:table-cell>
+
                 <fo:table-cell display-align="after">
-                    <fo:block-container reference-orientation="90" margin-left="1mm">
-                        <fo:block font-size="6pt" font-family="Liberation Sans" font-weight="bold" wrap-option="no-wrap">
+                    <fo:block-container reference-orientation="0" margin-left="1mm">
+                        <fo:block font-size="10pt" font-family="Liberation Sans" font-weight="bold" wrap-option="no-wrap">
                             Sammelcode zur Einlösung aller Verordnungen
                         </fo:block>
                     </fo:block-container>
                 </fo:table-cell>
-                <fo:table-cell display-align="after">
-                    <fo:block margin-left="2.5mm">
-                        <fo:instream-foreign-object>
-                            <barcode:barcode>
-                                <xsl:attribute name="message"><xsl:variable name="bundles" select="fhir:bundle"/>{"urls":[<xsl:for-each select="fhir:bundle"><xsl:variable name="qrPos" select="position()"/><xsl:variable name="bundlesCount" select="count($bundles)"/>"Task/<xsl:value-of
-                                        select="fhir:Bundle/fhir:identifier/fhir:value/@value"/>/$accept?ac=<xsl:value-of
-                                        select="fhir:accessCode"/>"<xsl:if test="$qrPos &lt; $bundlesCount">,</xsl:if></xsl:for-each>]}</xsl:attribute>
-                                <barcode:datamatrix>
-                                    <barcode:module-width>0.52mm</barcode:module-width>
-                                    <barcode:min-symbol-size>90</barcode:min-symbol-size>
-                                    <barcode:max-symbol-size>100</barcode:max-symbol-size>
-                                </barcode:datamatrix>
-                            </barcode:barcode>
-                        </fo:instream-foreign-object>
-                    </fo:block>
-                </fo:table-cell>
+
             </fo:table-body>
         </fo:table>
     </xsl:template>
@@ -295,11 +100,13 @@
                                         <fo:block>
                                             <fo:instream-foreign-object>
                                                 <barcode:barcode>
-                                                    <xsl:attribute name="message">{"urls":["Task/<xsl:value-of
+                                                    <xsl:attribute name="message"><xsl:variable name="bundles" select="fhir:bundle"/>{"urls":[<xsl:for-each select="fhir:bundle"><xsl:variable name="qrPos" select="position()"/><xsl:variable name="bundlesCount" select="count($bundles)"/>"Task/<xsl:value-of
                                                             select="fhir:Bundle/fhir:identifier/fhir:value/@value"/>/$accept?ac=<xsl:value-of
-                                                            select="fhir:accessCode"/>"]}</xsl:attribute>
+                                                            select="fhir:accessCode"/>"<xsl:if test="$qrPos &lt; $bundlesCount">,</xsl:if></xsl:for-each>]}</xsl:attribute>
                                                     <barcode:datamatrix>
-                                                        <barcode:module-width>0.7mm</barcode:module-width>
+                                                        <barcode:module-width>0.52mm</barcode:module-width>
+                                                        <barcode:min-symbol-size>90</barcode:min-symbol-size>
+                                                        <barcode:max-symbol-size>100</barcode:max-symbol-size>
                                                     </barcode:datamatrix>
                                                 </barcode:barcode>
                                             </fo:instream-foreign-object>

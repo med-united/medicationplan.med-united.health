@@ -39,7 +39,7 @@ public class MedicationPlanService {
         String serialized = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root xmlns=\"http://hl7.org/fhir\">\n" +
                 medicationPlans.stream().filter(bundle -> bundle.getBundle() != null).map(bundle ->
                                 "    <bundle>\n" +
-                                        "        " + ctx.newXmlParser().encodeResourceToString(bundle.getBundle()) + "\n" +
+                                        "        " + bundle.getBundle() + "\n" +
                                         "    </bundle>")
                         .collect(Collectors.joining("\n")) +
                 "\n</root>";
