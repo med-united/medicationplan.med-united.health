@@ -13,12 +13,10 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Path("/medicationPlanPdf")

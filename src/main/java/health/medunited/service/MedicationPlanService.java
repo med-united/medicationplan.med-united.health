@@ -1,5 +1,6 @@
 package health.medunited.service;
 
+import ca.uhn.fhir.context.FhirContext;
 import health.medunited.model.MedicationPlan;
 import org.apache.fop.apps.*;
 import org.xml.sax.SAXException;
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class MedicationPlanService {
@@ -21,6 +23,8 @@ public class MedicationPlanService {
     private static final Logger log = Logger.getLogger(MedicationPlanService.class.getName());
 
     private FopFactory fopFactory = FopFactory.newInstance(new File("src/main/resources/fop/fop.xconf"));;
+
+    private final FhirContext ctx = FhirContext.forR4();
 
     public MedicationPlanService() throws IOException, SAXException {
     }
@@ -32,7 +36,13 @@ public class MedicationPlanService {
     }
 
     private File createTemporaryXmlFileFromBundles(List<MedicationPlan> medicationPlans) throws IOException {
-        String serialized = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root xmlns=\"http://hl7.org/fhir\">\n";
+        String serialized = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root xmlns=\"http://hl7.org/fhir\">\n" +
+                medicationPlans.stream().filter(bundle -> bundle.getBundle() != null).map(bundle ->
+                                "    <bundle>\n" +
+                                        "        " + ctx.newXmlParser().encodeResourceToString(bundle.getBundle()) + "\n" +
+                                        "    </bundle>")
+                        .collect(Collectors.joining("\n")) +
+                "\n</root>";
 
         File tmpFile = Files.createTempFile("bundle-", ".xml").toFile();
         Files.write(tmpFile.toPath(), serialized.getBytes(StandardCharsets.UTF_8));
