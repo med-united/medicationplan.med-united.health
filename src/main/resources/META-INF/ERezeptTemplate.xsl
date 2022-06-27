@@ -62,19 +62,26 @@
     </xsl:template>
 
     <xsl:template name="header">
-        <fo:table border-style="solid">
-            <fo:table-column column-number="1" column-width="70%"/>
-            <fo:table-column column-number="2" column-width="2%"/>
-            <fo:table-column column-number="3" column-width="28%"/>
+        <fo:table border-style="solid" table-layout="fixed">
+            <fo:table-column column-width="proportional-column-width(4)" column-number="1"/>
+            <fo:table-column column-width="proportional-column-width(3)" column-number="2"/>
             <fo:table-body>
-
-                <fo:table-cell display-align="after">
-                    <fo:block-container reference-orientation="0" margin-left="1mm">
-                        <fo:block font-size="10pt" font-family="Liberation Sans" font-weight="bold" wrap-option="no-wrap">
-                            Sammelcode zur Einlösung aller Verordnungen
-                        </fo:block>
-                    </fo:block-container>
-                </fo:table-cell>
+                <fo:table-row>
+                    <fo:table-cell display-align="after" text-align="left">
+                        <fo:block-container reference-orientation="0" margin-left="1mm">
+                            <fo:block font-size="10pt" font-family="Liberation Sans" font-weight="bold" wrap-option="no-wrap">
+                                Sammelcode zur Einlösung aller Verordnungen
+                            </fo:block>
+                        </fo:block-container>
+                    </fo:table-cell>
+                    <fo:table-cell display-align="after" text-align="right">
+                        <fo:block-container reference-orientation="0" margin-left="1mm">
+                            <fo:block font-size="10pt" font-family="Liberation Sans" font-weight="bold" wrap-option="no-wrap">
+                                Sammelcode zur Einlösung aller Verordnungen
+                            </fo:block>
+                        </fo:block-container>
+                    </fo:table-cell>
+                </fo:table-row>
 
             </fo:table-body>
         </fo:table>
