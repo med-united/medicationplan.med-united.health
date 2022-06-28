@@ -48,40 +48,9 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>ca.uhn.hapi.fhir</groupId>
-      <artifactId>hapi-fhir-structures-r4</artifactId>
-      <version>5.4.2</version>
-    </dependency>
-    <dependency>
-      <groupId>ca.uhn.hapi.fhir</groupId>
-      <artifactId>hapi-fhir-structures-r4</artifactId>
-      <version>5.4.2</version>
-    </dependency>
-    <dependency>
-      <groupId>ca.uhn.hapi.fhir</groupId>
-      <artifactId>hapi-fhir-validation</artifactId>
-      <version>5.4.2</version>
-      <exclusions>
-        <exclusion>
-          <groupId>xpp3</groupId>
-          <artifactId>xpp3</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.ws</groupId>
-      <artifactId>jaxws-rt</artifactId>
-      <version>2.3.4</version>
-    </dependency>
-    <dependency>
-      <groupId>ca.uhn.hapi.fhir</groupId>
-      <artifactId>hapi-fhir-validation-resources-r4</artifactId>
-      <version>5.4.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.hp.jipp</groupId>
-      <artifactId>jipp-core</artifactId>
-      <version>0.7.9</version>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.4.0-b180830.0359</version>
     </dependency>
     <dependency>
       <groupId>net.sf.saxon</groupId>
@@ -92,6 +61,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jackson</artifactId>
     </dependency>
+      <dependency>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-resteasy-jaxb</artifactId>
+      </dependency>
     <dependency>
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
@@ -167,7 +140,58 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<xjbSources>
+						<xjbSource>src/main/xsd/AMTS_Document_v1_6.xjb</xjbSource>
+					</xjbSources>
+					<sources>
+						<source>src/main/xsd/AMTS_Document_v1_6.xsd</source>
+						<source>src/main/xsd/AMTS_Einwilligung_Document_v1_0.xsd</source>
+					</sources>
+					<packageName>health.medunited.bmp</packageName>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.sun.activation</groupId>
+						<artifactId>jakarta.activation</artifactId>
+						<version>1.2.1</version>
+					</dependency>
+                    <dependency>
+                        <groupId>org.glassfish.jaxb</groupId>
+                        <artifactId>jaxb-runtime</artifactId>
+                        <version>2.3.1</version>
+                    </dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		<resources>
+			<!-- Bundle the xsd files as part of the jar -->
+			<resource>
+				<directory>src/main/xsd</directory>
+				<includes>
+					<include>**/*.xsd</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xconf</include>
+          <include>**/*.xsl</include>
+				</includes>
+			</resource>
+		</resources>
   </build>
   <profiles>
     <profile>

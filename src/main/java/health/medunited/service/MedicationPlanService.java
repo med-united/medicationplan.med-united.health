@@ -1,51 +1,63 @@
 package health.medunited.service;
 
-import ca.uhn.fhir.context.FhirContext;
-import health.medunited.model.MedicationPlan;
-import org.apache.fop.apps.*;
-import org.xml.sax.SAXException;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.xml.XMLConstants;
-import javax.xml.transform.*;
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.List;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+
+import org.apache.fop.apps.FOPException;
+import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.MimeConstants;
+
+import health.medunited.bmp.MedikationsPlan;
+import health.medunited.resource.reader.MessageBodyReaderXmlMedicationPlan;
 
 @ApplicationScoped
 public class MedicationPlanService {
 
     private static final Logger log = Logger.getLogger(MedicationPlanService.class.getName());
 
-    private FopFactory fopFactory = FopFactory.newInstance(new File("src/main/resources/fop/fop.xconf"));;
+    private FopFactory fopFactory;
 
-    private final FhirContext ctx = FhirContext.forR4();
-
-    public MedicationPlanService() throws IOException, SAXException {
+    public MedicationPlanService() {
+        try {
+            URL url = MedicationPlanService.class.getResource("/fop/fop.xconf");
+            URI uri = url.toURI();
+            fopFactory = FopFactory.newInstance(uri);
+        } catch (URISyntaxException e) {
+            log.log(Level.SEVERE, "Could not create FopFactory", e);
+        }
     }
 
-    public ByteArrayOutputStream generatePdf(List<MedicationPlan> medicationPlans) throws IOException, FOPException, TransformerException {
+    public ByteArrayOutputStream generatePdf(MedikationsPlan medicationPlan) throws IOException, FOPException, TransformerException, JAXBException {
 
-        File xml = createTemporaryXmlFileFromBundles(medicationPlans);
+        File xml = createTemporaryXmlFileFromBundles(medicationPlan);
         return generatePdfInOutputStream(xml);
     }
 
-    private File createTemporaryXmlFileFromBundles(List<MedicationPlan> medicationPlans) throws IOException {
-        String serialized = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root xmlns=\"http://hl7.org/fhir\">\n" +
-                medicationPlans.stream().filter(bundle -> bundle.getBundle() != null).map(bundle ->
-                                "    <bundle>\n" +
-                                        "        " + bundle.getBundle() + "\n" +
-                                        "    </bundle>")
-                        .collect(Collectors.joining("\n")) +
-                "\n</root>";
-
-        File tmpFile = Files.createTempFile("bundle-", ".xml").toFile();
-        Files.write(tmpFile.toPath(), serialized.getBytes(StandardCharsets.UTF_8));
+    private File createTemporaryXmlFileFromBundles(MedikationsPlan medicationPlans) throws IOException, JAXBException {
+        
+        File tmpFile = Files.createTempFile("medication-plan-", ".xml").toFile();
+        MessageBodyReaderXmlMedicationPlan.jaxbContext.createMarshaller().marshal(medicationPlans, tmpFile);
         return tmpFile;
     }
 
@@ -63,7 +75,7 @@ public class MedicationPlanService {
         factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
 //
 //        // with XSLT:
-        String xslPath = "/META-INF/ERezeptTemplate.xsl";
+        String xslPath = "/META-INF/MedicationPlan.xsl";
 
         InputStream inputStream = getClass().getResourceAsStream(xslPath);
         String systemId = this.getClass().getResource(xslPath).toExternalForm();
