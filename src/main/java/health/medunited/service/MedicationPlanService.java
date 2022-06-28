@@ -103,7 +103,8 @@ public class MedicationPlanService {
         });
 
         Transformer transformer = factory.newTransformer(xslt);
-        transformer.setParameter("bundleFileUrl", xml.toURI().toURL().toString());
+        transformer.setParameter("medicationPlanFileUrl", xml.toURI().toURL().toString());
+        transformer.setParameter("medicationPlanFileContent", Files.readString(xml.toPath()));
 //
 //        // Step 5: Setup input and output for XSLT transformation
 //        // Setup input stream

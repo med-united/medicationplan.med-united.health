@@ -12,7 +12,8 @@
 
     <xsl:decimal-format name="de" decimal-separator=',' grouping-separator='.'/>
 
-    <xsl:param name="bundleFileUrl"/>
+    <xsl:param name="medicationPlanFileUrl"/>
+    <xsl:param name="medicationPlanFileContent"/>
 
     <xsl:template match="amts:MP">
         <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="Courier, Liberation Sans" font-size="12pt"
@@ -22,9 +23,9 @@
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="DIN-A4" column-count="1" page-width="297mm" page-height="210mm"
                                        margin-top="10mm" margin-bottom="10mm" margin-left="10mm" margin-right="10mm">
-                    <fo:region-body region-name="body" margin-top="60mm" margin-bottom="0mm" margin-left="0mm"
+                    <fo:region-body region-name="body" margin-top="68mm" margin-bottom="0mm" margin-left="0mm"
                                     margin-right="0mm"/>
-                    <fo:region-before region-name="header" extent="55mm"/>
+                    <fo:region-before region-name="header" extent="63mm"/>
                     <fo:region-after region-name="footer" extent="30mm"/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
@@ -55,18 +56,17 @@
 
     <xsl:template name="footer">
         <fo:block text-align="end">
-            <fo:external-graphic content-height="41mm" content-width="scale-to-fit"
-                                 src="classpath:/fop/img/erezept-app-note.svg"/>
+            med united
         </fo:block>
     </xsl:template>
 
     <xsl:template name="header">
-        <fo:table border-style="solid">
+        <fo:table border-style="solid" width="100%">
             <fo:table-column column-number="1" column-width="15%"/>
-            <fo:table-column column-number="2" column-width="75%"/>
-            <fo:table-column column-number="3" column-width="10%"/>
+            <fo:table-column column-number="2" column-width="61%"/>
+            <fo:table-column column-number="3" column-width="24%"/>
             <fo:table-body>
-                <fo:table-cell display-align="before" border-right="0.5mm solid">
+                <fo:table-cell border-right="0.5mm solid">
                     <fo:block-container reference-orientation="0" margin-left="1mm">
                         <fo:block font-size="14pt" font-family="Liberation Sans" font-weight="bold"
                                   wrap-option="no-wrap">
@@ -80,7 +80,7 @@
                         </fo:block>
                     </fo:block-container>
                 </fo:table-cell>
-                <fo:table-cell display-align="after">
+                <fo:table-cell border-right="0.5mm solid">
                     <fo:block-container reference-orientation="0" margin-left="1mm">
                         <fo:block font-size="12pt" font-family="Liberation Sans" font-weight="bold"
                                   wrap-option="no-wrap">
@@ -130,11 +130,11 @@
                         <fo:block>
                             <fo:instream-foreign-object>
                                 <barcode:barcode>
-                                    TODO: Hallo Welt!
+                                    <xsl:attribute name="message">
+                                        <xsl:value-of select="$medicationPlanFileContent" />
+                                    </xsl:attribute>
                                     <barcode:datamatrix>
                                         <barcode:module-width>0.52mm</barcode:module-width>
-                                        <barcode:min-symbol-size>90</barcode:min-symbol-size>
-                                        <barcode:max-symbol-size>100</barcode:max-symbol-size>
                                     </barcode:datamatrix>
                                 </barcode:barcode>
                             </fo:instream-foreign-object>
@@ -146,7 +146,7 @@
     </xsl:template>
 
     <xsl:template name="body">
-        <fo:table table-layout="fixed" width="190mm">
+        <fo:table border-style="solid" width="100%">
             <fo:table-column column-number="1" column-width="15%"/>
             <fo:table-column column-number="2" column-width="15%"/>
             <fo:table-column column-number="3" column-width="5%"/>
@@ -242,22 +242,22 @@
                         </fo:table-cell>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                TODO
+                                <xsl:value-of select="@m"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                TODO
+                                <xsl:value-of select="@d"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                TODO
+                                <xsl:value-of select="@v"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                TODO
+                                <xsl:value-of select="@h"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell>
