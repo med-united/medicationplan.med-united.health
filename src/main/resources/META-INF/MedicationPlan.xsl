@@ -124,7 +124,7 @@
         <fo:table-column column-number="9" column-width="5%"/>
         <fo:table-column column-number="10" column-width="25%"/>
         <fo:table-column column-number="11" column-width="20%"/>
-        <fo:table-header background-color="#F38222" border-width="1pt" border-style="solid">
+        <fo:table-header background-color="#eeeeee" border-width="1pt" border-style="solid">
             <fo:table-row>
                 <fo:table-cell>
                     <fo:block>
