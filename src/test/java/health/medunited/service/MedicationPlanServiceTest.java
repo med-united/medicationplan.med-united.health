@@ -15,9 +15,9 @@ import org.xml.sax.SAXException;
 import health.medunited.bmp.MedikationsPlan;
 import health.medunited.resource.reader.MessageBodyReaderXmlMedicationPlan;
 
-public class MedicationPlanServiceTest {
+class MedicationPlanServiceTest {
     @Test
-    public void testCreateMedicationPlan() throws IOException, SAXException, WebApplicationException, TransformerException, JAXBException {
+    void testCreateMedicationPlan() throws IOException, SAXException, WebApplicationException, TransformerException, JAXBException {
         MedicationPlanService medicationPlanService = new MedicationPlanService();
 
         ByteArrayOutputStream boas = medicationPlanService.generatePdf(
