@@ -23,7 +23,7 @@
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="DIN-A4" column-count="1" page-width="297mm" page-height="210mm"
                                        margin-top="10mm" margin-bottom="10mm" margin-left="10mm" margin-right="10mm">
-                    <fo:region-body region-name="body" margin-top="68mm" margin-bottom="0mm" margin-left="0mm"
+                    <fo:region-body region-name="body" margin-top="42mm" margin-bottom="0mm" margin-left="0mm"
                                     margin-right="0mm"/>
                     <fo:region-before region-name="header" extent="63mm"/>
                     <fo:region-after region-name="footer" extent="30mm"/>
@@ -134,7 +134,7 @@
                                         <xsl:value-of select="$medicationPlanFileContent" />
                                     </xsl:attribute>
                                     <barcode:datamatrix>
-                                        <barcode:module-width>0.52mm</barcode:module-width>
+                                        <barcode:module-width>0.30mm</barcode:module-width>
                                     </barcode:datamatrix>
                                 </barcode:barcode>
                             </fo:instream-foreign-object>
@@ -149,123 +149,123 @@
         <fo:table border-style="solid" width="100%">
             <fo:table-column column-number="1" column-width="15%"/>
             <fo:table-column column-number="2" column-width="15%"/>
-            <fo:table-column column-number="3" column-width="5%"/>
-            <fo:table-column column-number="4" column-width="5%"/>
-            <fo:table-column column-number="5" column-width="2.5%"/>
-            <fo:table-column column-number="6" column-width="2.5%"/>
-            <fo:table-column column-number="7" column-width="2.5%"/>
-            <fo:table-column column-number="8" column-width="2.5%"/>
-            <fo:table-column column-number="9" column-width="5%"/>
-            <fo:table-column column-number="10" column-width="25%"/>
-            <fo:table-column column-number="11" column-width="20%"/>
+            <fo:table-column column-number="3" column-width="6%"/>
+            <fo:table-column column-number="4" column-width="6%"/>
+            <fo:table-column column-number="5" column-width="3%"/>
+            <fo:table-column column-number="6" column-width="3%"/>
+            <fo:table-column column-number="7" column-width="3%"/>
+            <fo:table-column column-number="8" column-width="3%"/>
+            <fo:table-column column-number="9" column-width="7%"/>
+            <fo:table-column column-number="10" column-width="20%"/>
+            <fo:table-column column-number="11" column-width="19%"/>
             <fo:table-header background-color="#eeeeee" border-width="1pt" border-style="solid">
                 <fo:table-row>
-                    <fo:table-cell>
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Wirkstoff
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell>
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Handelsname
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell>
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Stärke
                         </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell>
+                    </fo:table-cell >
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Form
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell text-align="center">
+                    <fo:table-cell text-align="center" border-right="0.3mm solid" font-size="5pt">
                         <fo:block>
                             morgens
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell text-align="center">
+                    <fo:table-cell text-align="center" border-right="0.3mm solid" font-size="5pt">
                         <fo:block>
                             mittags
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell text-align="center">
+                    <fo:table-cell text-align="center" border-right="0.3mm solid" font-size="5pt">
                         <fo:block>
                             abends
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell text-align="center">
+                    <fo:table-cell text-align="center" border-right="0.3mm solid" font-size="5pt">
                         <fo:block>
                             zur Nacht
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell>
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Einheit
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell>
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Hinweis
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell>
+                    <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
                             Grund
                         </fo:block>
                     </fo:table-cell>
                 </fo:table-row>
             </fo:table-header>
-            <fo:table-body>
+            <fo:table-body font-size="8pt">
                 <xsl:for-each select="//amts:M">
-                    <fo:table-row>
-                        <fo:table-cell>
+                    <fo:table-row border-bottom="0.3mm solid">
+                        <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
                                 <xsl:value-of select="@p"/>
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell>
+                        <fo:table-cell border-right="0.3mm solid">
+                            <fo:block>
+                                <xsl:value-of select="@a"/>
+                            </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
                                 TODO
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell>
+                        <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
                                 TODO
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell>
-                            <fo:block>
-                                TODO
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell text-align="center">
+                        <fo:table-cell text-align="center" border-right="0.3mm solid">
                             <fo:block>
                                 <xsl:value-of select="@m"/>
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell text-align="center">
+                        <fo:table-cell text-align="center" border-right="0.3mm solid">
                             <fo:block>
                                 <xsl:value-of select="@d"/>
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell text-align="center">
+                        <fo:table-cell text-align="center" border-right="0.3mm solid">
                             <fo:block>
                                 <xsl:value-of select="@v"/>
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell text-align="center">
+                        <fo:table-cell text-align="center" border-right="0.3mm solid">
                             <fo:block>
                                 <xsl:value-of select="@h"/>
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell>
+                        <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
                                 TODO
                             </fo:block>
                         </fo:table-cell>
-                        <fo:table-cell>
+                        <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
                                 <xsl:value-of select="@i"/>
                             </fo:block>
