@@ -1,0 +1,10 @@
+<MP xmlns="http://ws.gematik.de/fa/amtss/AMTS_Document/v1.6" v="025" U="B26FABD6598C7943CA4F8169CBD8941A" l="de-DE">
+  <P g="Jürgen" f="Wernersen" b="19400324" />
+  <A n="med.united Manuel Blechschmidt" s="undefined" z="undefined" c="undefined" p="undefined" e="manuel.blechschmidt@incentergy.de" t="2022-07-05T12:58:35" />
+  <S>
+    <M p="230272" a="METOPROLOLSUCCINAT-1A Phar.95 Retardtabletten" m="1" d="0" v="0" h="0" />
+    <M p="9900751" a="SIMVA ARISTO 40 mg Filmtabletten" m="0" d="0" v="1" h="0" />
+    <M p="2239828" a="FENTANYL AbZ 75 μg/h Matrixpflaster 12,375mg/Pfl." m="0" d="0" v="0" h="0" />
+    <M p="2455874" a="LAIF 900 Balance Filmtabletten" m="1" d="0" v="0" h="0" />
+   </S>
+</MP>

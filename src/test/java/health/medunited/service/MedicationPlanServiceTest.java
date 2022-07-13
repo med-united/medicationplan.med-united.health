@@ -26,4 +26,15 @@ class MedicationPlanServiceTest {
         Files.write(Paths.get("target/MedicationPlan.pdf"), boas.toByteArray());
         
     }
+
+    @Test
+    void testCreateMedicationPlanMEDU218() throws IOException, SAXException, WebApplicationException, TransformerException, JAXBException {
+        MedicationPlanService medicationPlanService = new MedicationPlanService();
+
+        ByteArrayOutputStream boas = medicationPlanService.generatePdf(
+            new MessageBodyReaderXmlMedicationPlan().readFrom(MedikationsPlan.class, null, null, null, null, getClass().getResourceAsStream("/MedicationPlan-MEDU-218.xml")));
+
+        Files.write(Paths.get("target/MedicationPlan-MEDU-218.pdf"), boas.toByteArray());
+        
+    }
 }

@@ -131,7 +131,9 @@
                             <fo:instream-foreign-object>
                                 <barcode:barcode>
                                     <xsl:attribute name="message">
-                                        <xsl:value-of select="$medicationPlanFileContent" />
+                                        <!-- Remove non ISO-8859-1 characters -->
+                                        <!-- https://stackoverflow.com/questions/22398559/remove-characters-not-in-specified-xslt-encoding -->
+                                        <xsl:value-of select="replace($medicationPlanFileContent, '[^\p{IsBasicLatin}\p{IsLatin-1Supplement}]', '')" />
                                     </xsl:attribute>
                                     <barcode:datamatrix>
                                         <barcode:module-width>0.30mm</barcode:module-width>
