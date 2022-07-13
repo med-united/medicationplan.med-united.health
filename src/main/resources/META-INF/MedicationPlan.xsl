@@ -232,12 +232,12 @@
                         </fo:table-cell>
                         <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
-                                TODO
+                                <xsl:value-of select="@s"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
-                                TODO
+                                <xsl:value-of select="@f"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell text-align="center" border-right="0.3mm solid">
