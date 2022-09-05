@@ -264,7 +264,6 @@
                         </fo:table-cell>
                         <fo:table-cell border-right="0.3mm solid">
                             <fo:block>
-                                TODO
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell border-right="0.3mm solid">
