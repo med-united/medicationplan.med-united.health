@@ -23,9 +23,9 @@
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="DIN-A4" column-count="1" page-width="297mm" page-height="210mm"
                                        margin-top="10mm" margin-bottom="10mm" margin-left="10mm" margin-right="10mm">
-                    <fo:region-body region-name="body" margin-top="42mm" margin-bottom="0mm" margin-left="0mm"
+                    <fo:region-body region-name="body" margin-top="55mm" margin-bottom="0mm" margin-left="0mm"
                                     margin-right="0mm"/>
-                    <fo:region-before region-name="header" extent="63mm"/>
+                    <fo:region-before region-name="header" extent="55mm"/>
                     <fo:region-after region-name="footer" extent="30mm"/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
@@ -63,8 +63,8 @@
     <xsl:template name="header">
         <fo:table border-style="solid" width="100%">
             <fo:table-column column-number="1" column-width="15%"/>
-            <fo:table-column column-number="2" column-width="61%"/>
-            <fo:table-column column-number="3" column-width="24%"/>
+            <fo:table-column column-number="2" column-width="67%"/>
+            <fo:table-column column-number="3" column-width="18%"/>
             <fo:table-body>
                 <fo:table-cell border-right="0.5mm solid">
                     <fo:block-container reference-orientation="0" margin-left="1mm">
@@ -164,12 +164,12 @@
                 <fo:table-row>
                     <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
-                            Wirkstoff
+                            PZN
                         </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-right="0.3mm solid">
                         <fo:block>
-                            Handelsname
+                            Handelsname oder Wirkstoff
                         </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-right="0.3mm solid">

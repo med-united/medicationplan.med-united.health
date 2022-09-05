@@ -1,0 +1,16 @@
+<MP xmlns="http://ws.gematik.de/fa/amtss/AMTS_Document/v1.6" v="025" U="409555AB1B2E5A0E00CDF4819C9EBC19" l="de-DE">
+  <P g="XXXXXXXXXXXXXXXXXX" f="XXXXXXXXXXXXXXXXXX" b="19610312" />
+  <A n="med.united Manuel Blechschmidt" s="Achenseeweg 50" z="12209" c="Berlin" p="+491736322621" e="m.blechschmidt@incentergy.de" t="2022-09-05T13:44:03" />
+  <S>
+    <M p="7663229" a="Spironolacton 50mg" m="1" d="0" v="0" h="0" />
+    <M p="5541597" a="Resolor 2mg" m="1" d="0" v="0" h="0" />
+    <M p="7387887" a="Novaminsulfon 500mg/ml" m="30°" d="30°" v="30°" h="0" />
+    <M p="9123388" a="Levetiracetam 750mg                         (N)" m="1" d="0" v="1" h="0" />
+    <M p="" a="Salbutamol" m="1" d="1" v="1" h="1" />
+    <M p="" a="MSI 10mg bei Unruhe, Dyspnoe, Schmerzen" m="0" d="0" v="0" h="0" i="Einzeldosis: 10mg. Max Dosis 24 Stunden: 2 x tägl. " />
+    <M p="" a="Nifehexal Tr. RR über 185 (30° = 20mg)" m="0" d="0" v="0" h="0" i="Einzeldosis: 15°. Max Dosis 24 Stunden: 3 x tägl. " />
+    <M p="" a="Triamgalensalbe bei Hypergranulom" m="0" d="0" v="0" h="0" i="Einzeldosis: . Max Dosis 24 Stunden: 3xtägl. " />
+    <M p="14183369" a="MCP 10mg supp bei Übelkeit/ Erbrechen" m="0" d="0" v="0" h="0" i="Einzeldosis: 10mg. Max Dosis 24 Stunden: 3xtägl " />
+    <M p="" a="Laxoberal Tr. (bei Obstipation  &lt; 3Tage)" m="0" d="0" v="0" h="0" i="Einzeldosis: 10°. Max Dosis 24 Stunden: 1 x tägl. " />
+   </S>
+</MP>
