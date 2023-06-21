@@ -51,7 +51,7 @@ If you want to learn more about building native executables, please consult http
 
 - RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing JAX-RS and more
 
-## Provided Code
+## Provided code
 
 ### RESTEasy JAX-RS
 
